@@ -31,7 +31,6 @@ tmr.alarm(0, 1000, 1, function()
         end
 end)
 
-
 tmr.alarm(1, 50000, 1, function()
      m:publish("BedRoomRGBAvailability","online",0,1)
 end)
