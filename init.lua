@@ -10,11 +10,11 @@ wifi.setmode(wifi.STATION)
 wifi.sta.sethostname("Node-RGB")
 station_cfg={}
 station_cfg.ssid="WIFI SSID"
-station_cfg.pwd="WIFI 密码"
+station_cfg.pwd="WIFI PASSWORD"
 wifi.sta.config(station_cfg)
 wifi.sta.autoconnect(1)
 
-local i, buffer = 0, ws2812.newBuffer(20, 3)
+local i, buffer = 0, ws2812.newBuffer(灯珠数量, 3)
 buffer:fill(0, 0, 0)
 ws2812.write(buffer)
  
@@ -31,13 +31,14 @@ tmr.alarm(0, 1000, 1, function()
         end
 end)
 
+
 tmr.alarm(1, 50000, 1, function()
      m:publish("BedRoomRGBAvailability","online",0,1)
 end)
 
 
 function init_mqtt()
-    m:connect("mqtt地址",1883,0, 
+    m:connect("mqtt服务地址",1883,0, 
                function(client)
                    print("connect success")   
                    connect_state = true
@@ -58,6 +59,9 @@ m:on("message", function(client, topic, data)
             white()
             m:publish("BedRoom/rgb","{\"state\":\"ON\"}",0,1)
         elseif t["state"] == "OFF" and t["color"] == nil and t["brightness"] == nil and t["effect"] == nil then
+            if tmr.state() == true then
+                tmr.stop(2)
+            end
             close()
             m:publish("BedRoom/rgb","{\"state\":\"OFF\"}",0,1)
         elseif t["color"] ~= nil and t["brightness"] == nil and t["effect"] == nil then
