@@ -8,7 +8,7 @@ r = 230
 b = 230
 brightness = 255
 
-local i, buffer = 0, ws2812.newBuffer(20, 3)
+local i, buffer = 0, ws2812.newBuffer(config.LEDNUM, 3)
 ws2812_effects.init(buffer)
 buffer:fill(0, 0, 0)
 ws2812.write(buffer)

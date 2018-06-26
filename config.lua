@@ -7,5 +7,6 @@ module.PWD = "971603"
 module.ENDPOINT = "/nodemcu/"
 module.DELAY = 1000
 module.DHTPIN = 5
+moudle.LEDNUM = 20
 
 return module

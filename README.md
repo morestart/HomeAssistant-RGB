@@ -2,8 +2,7 @@
 
 ## 使用说明
 
-- 修改代码中的WIFI设置以及MQTT服务器信息
-- ws2812.newBuffer(20, 3) 第一个参数为灯珠数量,将其修改为你的灯珠数量
+- 修改`config.lua`文件的配置信息
 
 ## 支持功能
 
@@ -23,5 +22,6 @@ light:
     availability_topic: "BedRoomRGBAvailability"
     rgb: true
     effect: true
+    brightness: true
     effect_list: [flash, close effect]
 ```
